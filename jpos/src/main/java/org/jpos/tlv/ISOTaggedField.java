@@ -142,11 +142,9 @@ public class ISOTaggedField extends ISOComponent {
             delegate.dump(ps, "");
 
             String s = new String(baos.toByteArray());
-            if (s.endsWith("\r") || s.endsWith("\n") || s.endsWith("\r\n")) {
-                s = s.substring(0, s.length() - 1);
-            }
+            s = s.replaceAll("(\\r|\\n)", "");
             p.print(s);
-            p.print("</" + tag + ">\n");
+            p.print("</" + tag + ">"+System.lineSeparator());
         } else {
             delegate.dump(p, indent);
         }
